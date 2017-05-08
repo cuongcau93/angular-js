@@ -1,10 +1,15 @@
-import { PipeTransform } from "@angular/core";
+import { PipeTransform, Pipe } from "@angular/core";
+import{ IProduct } from './product'
+
+@Pipe({
+    name: 'productFilter'
+})
 
 export class ProductFilterPipe implements PipeTransform {
     
-    transform(value: any, ...args: any[]) {
-        throw new Error('Method not implemented.');
+    transform(value: IProduct[], filterBy: string) : IProduct[] {
+        filterBy = filterBy ? filterBy.toLocaleLowerCase() : null;
+        return filterBy? value.filter((product: IProduct) =>
+            product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1) : value;    
     }
-
-
 }

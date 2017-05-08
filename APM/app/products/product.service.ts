@@ -1,22 +1,12 @@
 
-import { Component, OnInit } from '@angular/core';
-import { IProduct } from './product';
+import { Injectable } from "@angular/core";
+import { IProduct } from "./product";
 
-@Component({
-    selector: 'pm-products',
-    moduleId: module.id,
-    templateUrl: 'product-list.component.html',
-    styleUrls: ['product-list.component.css']
-})
-
-export class ProductListComponent implements OnInit{
-    pageTitle: string = 'Product List';
-    imageWidth: number = 50;
-    imageMargin: number = 2;
-    showImage: boolean = false;
-    listFilter: string = 'Cart';
-    products: IProduct[]=[
-        {
+@Injectable()
+export class ProductService{
+    getProducts(): IProduct[]{
+        return [
+            {
             "productId": 1,
             "productName": "Leaf Rake",
             "productCode": "GDN-0011",
@@ -36,18 +26,6 @@ export class ProductListComponent implements OnInit{
             "starRating": 4.2,
             "imageUrl": "http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png"
         }
-    ];
-
-    toggleImage(): void{
-        this.showImage = !this.showImage;
+        ]
     }
-    
-    onRatingClicked(message: string) : void{
-        this.pageTitle = 'Product List: '+ message;
-    }
-
-    ngOnInit(): void{
-        console.log('In OnInit');
-    }
-    
 }
